@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyparser = require('body-parser');
+const cron = require('node-cron');
 
 const { PORT } = require('./config/serverConfig');
 
@@ -10,6 +11,10 @@ const setupAndStartServer = async () => {
     app.use(bodyparser.urlencoded({ extended: true }));
 
     // app.use('/api', apiRoutes);
+
+    // cron.schedule('* * * * *', () => {
+    //     console.log('running a task every minute');
+    // });
 
     app.listen(PORT, () => {
         if (process.env.DB_SYNC) {
