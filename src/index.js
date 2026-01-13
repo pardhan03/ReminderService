@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-const cron = require('node-cron');
 
 const { PORT } = require('./config/serverConfig');
+
+const TicketController = require('./controllers/ticket-controller');
+const { setupJobs } = require('./utils/job');
 
 const setupAndStartServer = async () => {
     const app = express();
@@ -10,11 +12,7 @@ const setupAndStartServer = async () => {
     app.use(bodyparser.json());
     app.use(bodyparser.urlencoded({ extended: true }));
 
-    // app.use('/api', apiRoutes);
-
-    // cron.schedule('* * * * *', () => {
-    //     console.log('running a task every minute');
-    // });
+    app.post('/api/v1/tickets', TicketController.create);
 
     app.listen(PORT, () => {
         if (process.env.DB_SYNC) {
