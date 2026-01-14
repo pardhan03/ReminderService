@@ -3,10 +3,11 @@ const bodyparser = require('body-parser');
 
 const { PORT, REMINDER_BINDING_KEY } = require('./config/serverConfig');
 
-const { subscribeEvents } = require('./services/email-service');
-const TicketController = require('./controllers/ticket-controller');
-const { setupJobs } = require('./utils/job');
 const { createChannel, subscribeMessage } = require('./utils/messageQueue');
+const TicketController = require('./controllers/ticket-controller');
+const { subscribeEvents } = require('./services/email-service');
+
+const { setupJobs } = require('./utils/job');
 
 const setupAndStartServer = async () => {
     const app = express();
